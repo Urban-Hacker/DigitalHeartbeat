@@ -1,0 +1,72 @@
+body {
+  background-color: rgb(211, 211, 211);
+  color:rgb(59, 59, 59);
+}
+h3{
+  padding: 10px;
+  margin: 0px;
+}
+small{
+  font-size: 10px;
+}
+
+footer{
+  text-align: center;
+}
+
+.status{
+  text-align: right;
+}
+
+.result tr{
+    border-bottom: 1px solid rgb(199, 199, 199);
+}
+
+.result td{
+    border-right: 0px solid var(--primary-color);
+    border-left: 0px solid var(--primary-color);
+}
+
+.result{
+  border: 0px solid var(--primary-color);
+}
+
+.desc{
+  padding: 16px;
+}
+
+.alert{
+  padding: 16px;
+  background-color: rgb(255, 0, 76)!important;
+}
+
+.section{
+  background-color: rgb(241, 241, 241);
+  margin-bottom: 20px;
+}
+
+.section-title{
+  background-color: rgb(230, 230, 230);
+  color:rgb(93, 93, 93);
+  font-weight: normal;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-ok{
+  background-color: rgb(22, 158, 117);
+}
+.dot-fail{
+  background-color: rgb(255, 0, 76);
+}
+.fail{
+  color: rgb(255, 0, 76);
+}
+
+.ok{
+  color: rgb(22, 158, 117);
+}
