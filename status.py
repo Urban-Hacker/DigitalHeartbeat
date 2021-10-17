@@ -1,5 +1,6 @@
 # Simple service to check the status:
 import os
+from shutil import copyfile
 
 from config import *
 
@@ -128,5 +129,8 @@ else:
     page.add_data("popup", '')
 
 page.add_data("content", html)
-with open("status.html", "w") as status_out:
+with open(config["outputpath"] + config["outputname"], "w") as status_out:
     status_out.write(page.get_html())
+
+copyfile("templates/vanilla.css", config["outputpath"] + "vanilla.css")
+copyfile("templates/style.css", config["outputpath"] + "style.css")

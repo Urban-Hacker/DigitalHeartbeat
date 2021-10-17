@@ -2,6 +2,12 @@ config = {
     # Main title of the page
     "title": "Demo",
 
+    # Output directory
+    "outputpath": "./demo/",
+
+    # Output name
+    "outputname": "index.html",
+
     # How many previous results should be kept
     "history": 42,
 

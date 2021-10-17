@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="refresh" content="60">
+  <title>Demo</title>
+  <link rel="stylesheet" href="vanilla.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Demo</h1>
+  <div class="section desc">
+    <strong>Simple Digital Heartbeat</strong> is a lightweight pure HTML/CSS status page. You can easily add sections. Each tests will execute a simple bash command. If the result is 0 the test is considered as a success. If anything else is returned it is considered as a failure.<br /><br />The full documentation can be found on the <a
+      href="https://github.com/Urban-Hacker/DigitalHeartbeat">github</a> page.
+  </div>
+  <div class="section warn">This message will be automatically displayed in case of one or more failure(s).<br /><br />It can be customized by using <strong>basic HTML</strong> like any other text field.</div>
+  <h3 class="section-title">Status History</h3>
+  <div class="section desc graph">
+    <abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No data)"><span class="square"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr><abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr><abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr><abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr><abbr title="(2 outages detected)"><span class="square dot-fail"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(2 outages detected)"><span class="square dot-fail"></span></abbr><abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(No outages)"><span class="square dot-ok"></span></abbr><abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr>
+  </div>
+  <!-- ==== -->
+  <h3 class='section-title allclear'>London Datacenter</h3>
+<div class='section'>
+  <table class='result'>
+    <tr>
+  <td>Main Server</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr><tr>
+  <td>Router</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr><tr>
+  <td>Mail Server ELIAD</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr><tr>
+  <td>Mail Server DAVID</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr>
+  </table>
+</div><h3 class='section-title warn'>Internal Network</h3>
+<div class='section'>
+  <table class='result'>
+    <tr>
+  <td>urbanhacker.net (web)</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr><tr>
+  <td>failure example (web)</td>
+  <td class="status"><span class="dot dot-fail"></span></td>
+</tr>
+  </table>
+</div><h3 class='section-title [[state]]'>Custom Text Section</h3>
+<div class='section'>
+  <table class='result'>
+    <tr><td>You can use a custom section at any place for various reason like planned maintenance.<br /><ul><li>Maintenance on the data center</li><li>Rebooting main servers</li></ul></td></tr>
+  </table>
+</div><h3 class='section-title allclear'>External Network</h3>
+<div class='section'>
+  <table class='result'>
+    <tr>
+  <td>DNS server 8.8.8.8 (ping)</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr><tr>
+  <td>linux.com (web)</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr><tr>
+  <td>github.com (web)</td>
+  <td class="status"><span class="dot dot-ok"></span></td>
+</tr>
+  </table>
+</div>
+  <footer>
+    Powered by <strong>Simple Digital Heartbeat</strong> | Source code is on <a
+      href="https://github.com/Urban-Hacker/DigitalHeartbeat">github</a>
+  </footer>
+</body>
+
+</html>
