@@ -3,7 +3,7 @@ config = {
     "title": "Demo",
 
     # Output directory
-    "outputpath": "./demo/",
+    "outputpath": "./docs/",
 
     # Output name
     "outputname": "index.html",
