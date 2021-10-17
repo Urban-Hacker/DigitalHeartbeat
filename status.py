@@ -23,42 +23,42 @@ class HtmlPage:
         return self._html
 
 
-page = HtmlPage("template.html")
+page = HtmlPage("templates/main.html")
 page.add_data("title", config["title"])
 page.add_data("desc", config["desc"])
 
-html = ""
-
 
 def printstatus(service, result):
-    html = "<tr><td>" + service + "</td>"
-    if result == 0:
-        html += "<td class='status'><span class='dot dot-ok'></span></td><tr>"
-    else:
-        html += "<td class='status'><span class='dot dot-fail'></span></td><tr>"
-    return html
+    page = HtmlPage("templates/entry.html")
+    page.add_data("service", service)
+    state = "ok"
+    if result != 0:
+        state = "fail"
+    page.add_data("state", state)
+    return page.get_html()
 
 
 g_errors = 0
+html = ""
 for section in config["sections"]:
+    sectionpage = HtmlPage("templates/section.html")
 
-    html_section = "<table class='result'>"
+    html_section = ""
     error = 0
     for test in section["tests"]:
         a = os.system(test["cmd"])
         if a > 0:
             error += 1
         html_section += printstatus(test["name"], a)
-    html_section += "</table></div>"
+    sectionpage.add_data("content", html_section)
 
-    report = " <small class='ok'>No outages</small>"
-    if error > 0:
-        report = " <small class='fail'>Some services are not working properly (" + str(
-            error) + ")</small>"
-    html += "<h3 class='section-title'>" + \
-        section["title"] + report + "</h3><div class='section'>"
-    html += html_section
-    html += "</div>"
+    #report = " <small class='ok'>No outages</small>"
+    # if error > 0:
+    #    report = " <small class='fail'>Some services are not working properly (" + str(
+    #        error) + ")</small>"
+
+    sectionpage.add_data("title", section["title"])
+    html += sectionpage.get_html()
     g_errors += error
 
 if g_errors > 0:
