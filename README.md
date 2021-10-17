@@ -2,6 +2,8 @@
 
 A simple lightweight and minimalist status page written in pure python with no dependencies.
 
+A demo page can be found here: https://urban-hacker.github.io/SimpleDigitalHeartbeat/index.html
+
 ## Features
 
 * Lightweight report page. Pure HTML and CSS. No javascripts.
