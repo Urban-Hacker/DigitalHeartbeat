@@ -23,43 +23,98 @@ class HtmlPage:
         return self._html
 
 
+class HtmlRender:
+
+    def status(service, result):
+        page = HtmlPage("templates/entry.html")
+        page.add_data("service", service)
+        state = "ok"
+        if result != 0:
+            state = "fail"
+        page.add_data("state", state)
+        return page.get_html()
+
+    def text(section):
+        page = HtmlPage("templates/section.html")
+        page.add_data("title", section["title"])
+        page.add_data("content", "<tr><td>" + section["desc"] + "</td></tr>")
+        return page.get_html()
+
+    def tests(section):
+        global g_errors
+        tests = section["tests"]
+        page = HtmlPage("templates/section.html")
+        page.add_data("title", section["title"])
+        html = ""
+        error = 0
+        for test in tests:
+            a = os.system(test["cmd"])
+            if a > 0:
+                error += 1
+            html += HtmlRender.status(test["name"], a)
+        g_errors += error
+
+        page.add_data("content", html)
+        if error > 0:
+            page.add_data("state", "alert")
+        else:
+            page.add_data("state", "allclear")
+        return page.get_html()
+
+    def graph():
+        try:
+            historicaldata = open("old.db", "r").read().replace(
+                "[", "").replace("]", "").split(",")
+        except:
+            a = open("old.db", "w")
+            a.write(str([]))
+            historicaldata = []
+
+        # Padding
+        graph = ""
+        if len(historicaldata) < config["history"]:
+            for i in range(0, config["history"] - len(historicaldata)):
+                graph += '<abbr title="(No data)"><span class="square"></span></abbr>'
+
+        newdata = []
+
+        for i in historicaldata:
+            i = int(i)
+            newdata.append(i)
+            if i > 0:
+                graph += '<abbr title="('
+                graph += str(i) + \
+                    ' outage(s) detected)"><span class="square dot-fail"></span></abbr>'
+            else:
+                graph += '<abbr title="(No outages)"><span class="square dot-ok"></span></abbr>'
+
+        newdata.append(g_errors)
+
+        if len(newdata) > config["history"]:
+            newdata = newdata[-config["history"]:]
+
+        a = open("old.db", "w")
+        a.write(str(newdata))
+
+        return graph
+
+
 page = HtmlPage("templates/main.html")
 page.add_data("title", config["title"])
 page.add_data("desc", config["desc"])
 
 
-def printstatus(service, result):
-    page = HtmlPage("templates/entry.html")
-    page.add_data("service", service)
-    state = "ok"
-    if result != 0:
-        state = "fail"
-    page.add_data("state", state)
-    return page.get_html()
-
-
 g_errors = 0
 html = ""
 for section in config["sections"]:
-    sectionpage = HtmlPage("templates/section.html")
+    sectionhtml = ""
+    if section["type"] == "tests":
+        sectionhtml = HtmlRender.tests(section)
+    if section["type"] == "text":
+        sectionhtml = HtmlRender.text(section)
+    html += sectionhtml
 
-    html_section = ""
-    error = 0
-    for test in section["tests"]:
-        a = os.system(test["cmd"])
-        if a > 0:
-            error += 1
-        html_section += printstatus(test["name"], a)
-    sectionpage.add_data("content", html_section)
-
-    #report = " <small class='ok'>No outages</small>"
-    # if error > 0:
-    #    report = " <small class='fail'>Some services are not working properly (" + str(
-    #        error) + ")</small>"
-
-    sectionpage.add_data("title", section["title"])
-    html += sectionpage.get_html()
-    g_errors += error
+page.add_data("graph", HtmlRender.graph())
 
 if g_errors > 0:
     page.add_data("popup", config["popup"])
