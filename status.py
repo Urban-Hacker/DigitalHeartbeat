@@ -17,6 +17,8 @@ class HtmlPage:
     def _gen_popup(self, data):
         if data == "":
             return data
+        if g_errors == 1:
+            return '<div class="section warn">' + data + '</div>'
         return '<div class="section alert">' + data + '</div>'
 
     def get_html(self):
@@ -55,8 +57,10 @@ class HtmlRender:
         g_errors += error
 
         page.add_data("content", html)
-        if error > 0:
+        if error > 1:
             page.add_data("state", "alert")
+        elif error == 1:
+            page.add_data("state", "warn")
         else:
             page.add_data("state", "allclear")
         return page.get_html()
@@ -81,10 +85,12 @@ class HtmlRender:
         for i in historicaldata:
             i = int(i)
             newdata.append(i)
-            if i > 0:
+            if i > 1:
                 graph += '<abbr title="('
                 graph += str(i) + \
-                    ' outage(s) detected)"><span class="square dot-fail"></span></abbr>'
+                    ' outages detected)"><span class="square dot-fail"></span></abbr>'
+            elif i == 1:
+                graph += '<abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr>'
             else:
                 graph += '<abbr title="(No outages)"><span class="square dot-ok"></span></abbr>'
 

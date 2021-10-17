@@ -6,7 +6,7 @@ config = {
     "history": 42,
 
     # Short description at the top of the page
-    "desc": """<strong>Simple Digital Heartbeat</strong> is a lightweight pure HTML/CSS status page. You can easily add sections and execute custom bash command.<br /><br />The full documentation can be found on the <a
+    "desc": """<strong>Simple Digital Heartbeat</strong> is a lightweight pure HTML/CSS status page. You can easily add sections. Each tests will execute a simple bash command. If the result is 0 the test is considered as a success. If anything else is returned it is considered as a failure.<br /><br />The full documentation can be found on the <a
       href="https://github.com/Urban-Hacker/DigitalHeartbeat">github</a> page.""",
 
     # What to display when one or more services are failing
