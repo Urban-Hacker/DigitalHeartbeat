@@ -1,6 +1,7 @@
 # Simple service to check the status:
 import os
 from shutil import copyfile
+from datetime import datetime
 
 from config import *
 
@@ -76,13 +77,14 @@ class HtmlRender:
             historicaldata = []
 
         # Padding
-        graph = ""
+        graph = "<div>"
         if len(historicaldata) < config["history"]:
             for i in range(0, config["history"] - len(historicaldata)):
                 graph += '<abbr title="(No data)"><span class="square"></span></abbr>'
 
         newdata = []
 
+        percent_ok = 0
         for i in historicaldata:
             i = int(i)
             newdata.append(i)
@@ -93,9 +95,16 @@ class HtmlRender:
             elif i == 1:
                 graph += '<abbr title="(1 outage detected)"><span class="square dot-warn"></span></abbr>'
             else:
+                percent_ok += 1
                 graph += '<abbr title="(No outages)"><span class="square dot-ok"></span></abbr>'
 
+        graph += "</div>"
+
         newdata.append(g_errors)
+
+        percent = round(percent_ok / (len(historicaldata) / 100.0), 2)
+        graph += "<small><strong>" + \
+            str(percent) + "% Uptime</strong></small>"
 
         if len(newdata) > config["history"]:
             newdata = newdata[-config["history"]:]
@@ -106,9 +115,14 @@ class HtmlRender:
         return graph
 
 
+now = datetime.now()
+dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
 page = HtmlPage("templates/main.html")
 page.add_data("title", config["title"])
 page.add_data("desc", config["desc"])
+page.add_data("refresh", str(config["refresh"]))
+page.add_data("now", "<small>Last Update: " + dt_string + "</small>")
 
 
 g_errors = 0

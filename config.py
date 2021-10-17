@@ -2,6 +2,9 @@ config = {
     # Main title of the page
     "title": "Demo",
 
+    # Refresh the status page (in seconds)
+    "refresh": 60,
+
     # Output directory
     "outputpath": "./docs/",
 
