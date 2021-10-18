@@ -102,9 +102,12 @@ class HtmlRender:
 
         newdata.append(g_errors)
 
-        percent = round(percent_ok / (len(historicaldata) / 100.0), 2)
-        graph += "<small><strong>" + \
-            str(percent) + "% Uptime</strong></small>"
+        if len(historicaldata) > 5:
+            percent = round(percent_ok / (len(historicaldata) / 100.0), 2)
+            graph += "<small><strong>" + \
+                str(percent) + "% Uptime</strong></small>"
+        else:
+            graph += "<small><strong>Not enough data yet for the uptime metric.</strong></small>"
 
         if len(newdata) > config["history"]:
             newdata = newdata[-config["history"]:]
