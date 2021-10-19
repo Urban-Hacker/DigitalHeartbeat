@@ -8,6 +8,9 @@ config = {
     # Output directory
     "outputpath": "./docs/",
 
+    # Log directory
+    "logpath": "./logs/",
+
     # Output name
     "outputname": "index.html",
 

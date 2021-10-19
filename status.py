@@ -6,6 +6,21 @@ from datetime import datetime
 from config import *
 
 
+class Log:
+    def __init__(self, conf):
+        now = datetime.now()
+        date = now.strftime("%d%m%Y")
+        self._file = open(conf["logpath"] + date + "-logs.txt", "a")
+        self.print("")
+        self.print(conf["title"])
+        self.print("------------")
+
+    def print(self, msg):
+        now = datetime.now()
+        dt_string = now.strftime("[%H:%M:%S]")
+        self._file.write(dt_string + " " + msg + "\n")
+
+
 class HtmlPage:
 
     def __init__(self, file):
@@ -46,6 +61,7 @@ class HtmlRender:
 
     def tests(section):
         global g_errors
+        global log
         tests = section["tests"]
         page = HtmlPage("templates/section.html")
         page.add_data("title", section["title"])
@@ -54,7 +70,12 @@ class HtmlRender:
         for test in tests:
             a = os.system(test["cmd"])
             if a > 0:
+                log.print("'" + section["title"] +
+                          "' => '" + test["name"] + "' [FAILURE]")
                 error += 1
+            else:
+                log.print("'" + section["title"] +
+                          "' => '" + test["name"] + "' [SUCCESS]")
             html += HtmlRender.status(test["name"], a)
         g_errors += error
 
@@ -117,6 +138,8 @@ class HtmlRender:
 
         return graph
 
+
+log = Log(config)
 
 now = datetime.now()
 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
