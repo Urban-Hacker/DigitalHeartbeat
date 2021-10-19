@@ -15,7 +15,7 @@ config = {
     "outputname": "index.html",
 
     # How many previous results should be kept
-    "history": 42,
+    "history": 91,
 
     # Short description at the top of the page
     "desc": """<strong>Simple Digital Heartbeat</strong> is a lightweight pure HTML/CSS status page. You can easily add sections. Each tests will execute a simple bash command. If the result is 0 the test is considered as a success. If anything else is returned it is considered as a failure.<br /><br />The full documentation can be found on the <a
