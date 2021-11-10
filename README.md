@@ -30,7 +30,7 @@ The global results will be kept and used in the Status History section.
 
 ## Advanced usage
 
-By default, 42 previous aggregated results are kept. If you run the script every 10 minutes it means on average you will have the history of the previous 7 hours.
+By default, 91 previous aggregated results are kept. If you run the script every 10 minutes it means on average you will have the history of the previous 15 hours.
 If you need more or less, it is possible to change this number.
 You can also add custom sections with only text to add optional information eg: scheduled maintenance.
 
